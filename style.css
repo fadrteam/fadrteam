@@ -58,7 +58,7 @@ section { background-color: #1a1a1a; margin-bottom: 20px; border-radius: 10px; b
 
 
 
-.section-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 25px; cursor: pointer; background: #1a1a1a; transition: background 0.3s; user-select: none; }
+.section-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 25px; cursor: pointer;  transition: background 0.3s; user-select: none; }
 .section-header:hover { background: #222; }
 .section-header h2 { margin: 0; font-size: 1.3rem; color: #fff; }
 .toggle-arrow { color: var(--accent-color, #4ade80); font-size: 1.2rem; transition: transform 0.3s ease, color 0.5s ease; }
@@ -82,7 +82,7 @@ section.tab-content { margin-bottom: 20px; background-color: #1a1a1a; border-rad
 .status-box { background: #222; padding: 15px; border-radius: 8px; border: 1px solid #333; }
 .monitor-item { margin-bottom: 15px; text-align: left; }
 .monitor-label { display: flex; justify-content: space-between; margin-bottom: 5px; font-family: monospace; font-weight: bold; font-size: 0.9rem; }
-.progress-bar { width: 100%; height: 12px; background-color: #111; border-radius: 6px; overflow: hidden; border: 1px solid #333; }
+
 .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-color, #4ade80), transparent, var(--accent-color, #4ade80)) !important; background-size: 200% 200% !important; background-position: 0% 50%; animation: gradientMove 3s linear infinite !important; transition: width 0.5s ease, background 0.5s ease; }
 
 #scan-log { background: #000; border: 1px solid var(--accent-color, #4ade80); border-radius: 5px; font-family: monospace; color: var(--accent-color, #4ade80); font-size: 0.9rem; transition: color 0.5s ease, border-color 0.5s ease; }
@@ -93,7 +93,7 @@ section.tab-content { margin-bottom: 20px; background-color: #1a1a1a; border-rad
 .weather-desc { color: #d1d1d1; margin-top: 5px; }
 
 /* --- Проекты --- */
-.project-item { background: #1a1a1a; padding: 15px; border-radius: 8px; margin-bottom: 15px; position: relative; overflow: hidden; }
+.project-item {  padding: 15px; border-radius: 8px; margin-bottom: 15px; position: relative; overflow: hidden; }
 .project-item h3 { color: #fff; margin-bottom: 10px; }
 .project-item p { font-size: 0.95rem; margin-bottom: 10px; color: #b0b0b0; }
 
@@ -104,7 +104,7 @@ section.tab-content { margin-bottom: 20px; background-color: #1a1a1a; border-rad
 
 /* --- Терминал --- */
 .terminal-window { background: #000; border-radius: 8px; border: 1px solid #333; overflow: hidden; font-family: 'Courier New', Courier, monospace; }
-.terminal-header { background: #1a1a1a; padding: 8px; display: flex; align-items: center; border-bottom: 1px solid #333; }
+.terminal-header {  padding: 8px; display: flex; align-items: center; border-bottom: 1px solid #333; }
 .terminal-body { padding: 15px; color: var(--accent-color, #4ade80); height: 150px; overflow-y: auto; font-size: 0.9rem; transition: color 0.5s ease; }
 .terminal-body p { margin-bottom: 5px; }
 .terminal-input-line { display: flex; padding: 10px 15px; background: #0a0a0a; border-top: 1px solid #333; align-items: center; }
@@ -117,7 +117,7 @@ section.tab-content { margin-bottom: 20px; background-color: #1a1a1a; border-rad
 .terminal-title { color: #888; font-size: 0.85rem; margin-left: 10px; }
 
 /* --- Таймлайн --- */
-.timeline-section { background: #1a1a1a; padding: 25px; border-radius: 10px; margin-bottom: 20px; }
+.timeline-section {  padding: 25px; border-radius: 10px; margin-bottom: 20px; }
 .timeline { position: relative; max-width: 700px; margin: 20px auto 0; padding-left: 40px; border-left: 2px solid #333; }
 .timeline-item { position: relative; margin-bottom: 30px; }
 .timeline-item:last-child { margin-bottom: 0; }
@@ -136,7 +136,7 @@ section.tab-content { margin-bottom: 20px; background-color: #1a1a1a; border-rad
 
 /* --- Меню --- */
 .nav-menu { display: flex; gap: 10px; margin-bottom: 20px; }
-.nav-btn { background: #1a1a1a; color: #888; border: 1px solid #333; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 1rem; transition: color 0.5s ease, border-color 0.5s ease; }
+.nav-btn {  color: #888; border: 1px solid #333; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 1rem; transition: color 0.5s ease, border-color 0.5s ease; }
 .nav-btn:hover:not(.active) { border-color: var(--accent-color, #4ade80); color: #fff; }
 .nav-btn.active {
     background: linear-gradient(90deg, var(--accent-color, #4ade80), transparent, var(--accent-color, #4ade80)) !important;
@@ -207,7 +207,7 @@ body.light-mode .sidebar-logo { color: #000; }
 .player-info p { margin: 0 0 15px 0; color: #888; font-size: 0.9rem; }
 .progress-container { width: 100%; height: 6px; background: #111; border-radius: 3px; cursor: pointer; margin-bottom: 15px; position: relative; }
 .player-controls { display: flex; gap: 20px; align-items: center; margin-top: 10px; }
-.ctrl-btn { background: #222; color: #d1d1d1; border: 1px solid #444; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; cursor: pointer; transition: transform 0.2s ease, color 0.5s ease, border-color 0.5s ease; outline: none; }
+
 .ctrl-btn:hover { background: #333; color: var(--accent-color, #4ade80); border-color: var(--accent-color, #4ade80); transform: scale(1.1); }
 .play-btn {
     background: linear-gradient(90deg, var(--accent-color, #4ade80), #ffffff, var(--accent-color, #4ade80)) !important;
@@ -446,4 +446,853 @@ body.light-mode #scroll-top-btn {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
     border: 1px solid color-mix(in srgb, var(--accent-color) 80%, transparent) !important;
     box-shadow: 0 4px 15px color-mix(in srgb, var(--accent-color) 30%, transparent) !important;
+}
+/* --- ПРЕЛОАДЕР (ТЕРМИНАЛ) --- */
+#preloader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.terminal-load-box {
+    width: 90%;
+    max-width: 450px; /* Чуть уже */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Выравниваем всё по левому краю */
+}
+
+/* Логотип */
+.loader-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 25px auto; /* Центрируем лого по горизонтали */
+    border: 2px solid var(--accent-color, #4ade80);
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.2); /* Убрали сильное свечение */
+}
+
+/* Текст */
+.terminal-load-text {
+    color: var(--accent-color, #4ade80);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    white-space: pre-wrap;
+    width: 100%;
+}
+
+.terminal-load-text::after {
+    content: '_';
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* Полоска */
+.terminal-load-bar {
+    width: 100%;
+    height: 3px;
+    background: #222;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.terminal-load-fill {
+    
+    height: 100%;
+    background: var(--accent-color, #4ade80);
+    box-shadow: 0 0 8px var(--accent-color, #4ade80);
+    transition: width 0.3s ease; /* Плавнее заполняется */
+}
+
+/* Крутящееся кольцо вокруг */
+.loader-ring {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: var(--accent-color, #4ade80);
+    border-bottom-color: var(--accent-color, #4ade80);
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Текст логотипа */
+.loader-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 2px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+.loader-text span { color: var(--accent-color, #4ade80); }
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.7; }
+}
+
+/* Счетчик процентов */
+.loader-percent {
+    margin-top: 15px;
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: #888;
+    letter-spacing: 1px;
+}
+
+/* --- Плавное появление (для AOS) --- */
+[data-aos] {
+    pointer-events: none;
+}
+[data-aos].aos-animate {
+    pointer-events: auto;
+}
+/* --- СТЕКЛЯННЫЕ БЛОКИ И СВЕЧЕНИЕ --- */
+header,
+section,
+.music-player,
+.project-item,
+.section-body,
+.terminal-window {
+    /* Полупрозрачный фон */
+    background: rgba(26, 26, 26, 0.6) !important;
+    /* Размытие того, что за блоком */
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    /* Тонкая рамка */
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    /* Легкая тень для объема */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+}
+
+/* Светлая тема для стекла */
+body.light-mode header,
+body.light-mode section,
+body.light-mode .music-player,
+body.light-mode .project-item,
+body.light-mode .section-body,
+body.light-mode .terminal-window {
+    background: rgba(255, 255, 255, 0.7) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Неоновое свечение при наведении на карточки */
+section:hover,
+.project-item:hover {
+    border-color: color-mix(in srgb, var(--accent-color, #4ade80) 50%, transparent) !important;
+    box-shadow: 0 0 20px color-mix(in srgb, var(--accent-color, #4ade80) 20%, transparent) !important;
+    transition: all 0.4s ease !important;
+}
+
+/* Кнопки в стиле "Hollow" с неоном */
+.nav-btn {
+    background: transparent !important;
+    border: 1px solid #333 !important;
+    color: #888 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.nav-btn:hover:not(.active) {
+    border-color: var(--accent-color, #4ade80) !important;
+    color: var(--accent-color, #4ade80) !important;
+    box-shadow: 0 0 10px color-mix(in srgb, var(--accent-color, #4ade80) 30%, transparent) !important;
+}
+
+.nav-btn.active {
+    border-color: var(--accent-color, #4ade80) !important;
+    box-shadow: 0 0 15px color-mix(in srgb, var(--accent-color, #4ade80) 40%, transparent) !important;
+    /* Твой градиент останется, но добавим неон */
+}
+
+/* Убираем черный фон у плеера, чтобы он стал стеклянным */
+.player-cover img {
+    box-shadow: 0 0 20px color-mix(in srgb, var(--accent-color, #4ade80) 30%, transparent) !important;
+}
+
+/* Делаем матрицу чуть более заметной */
+#matrix-canvas {
+    opacity: 0.25 !important;
+}
+#matrix-rain {
+    opacity: 0.6 !important;
+}
+/* --- ЖЕСТКИЙ СТЕКЛЯННЫЙ ЭФФЕКТ --- */
+header,
+section,
+.music-player,
+.project-item,
+.terminal-window,
+.section-body {
+    background: rgba(20, 20, 20, 0.4) !important; /* Темный, но прозрачный */
+    backdrop-filter: blur(15px) !important; /* Размытие фона */
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Светлая тема для стекла */
+body.light-mode header,
+body.light-mode section,
+body.light-mode .music-player,
+body.light-mode .project-item,
+body.light-mode .terminal-window,
+body.light-mode .section-body {
+    background: rgba(255, 255, 255, 0.6) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Неоновое свечение при наведении на карточки */
+section:hover,
+.project-item:hover {
+    border-color: color-mix(in srgb, var(--accent-color, #4ade80) 50%, transparent) !important;
+    box-shadow: 0 0 20px color-mix(in srgb, var(--accent-color, #4ade80) 20%, transparent) !important;
+}
+/* --- УБИРАЕМ ПОЛОСКУ У ВКЛАДОК (Обо мне, Проекты и т.д.) --- */
+section.tab-content::before {
+    display: none !important;
+}
+
+/* Оставляем только красивую стеклянную рамку */
+section.tab-content {
+    background: rgba(20, 20, 20, 0.4) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+   border: 1px solid rgba(255, 255, 255, 0.1) !important; /* Оставляем только рамку */
+    border-radius: 10px !important;
+     box-shadow: none !important; /* Убираем тяжелую тень */
+}
+/* --- ФИКС БАГА С ПРОЗРАЧНОСТЬЮ ВКЛАДОК --- */
+.tab-content.active,
+.tab-page.active {
+    /* Убираем старый fadeIn, который ломает backdrop-filter */
+    animation: slideUpFade 0.4s ease-out forwards !important;
+}
+
+@keyframes slideUpFade {
+    0% {
+        opacity: 0.9; /* Не делаем полностью прозрачным */
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* --- УБИРАЕМ ПОЛОСКУ У ВКЛАДОК --- */
+section.tab-content::before {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+}
+/* --- ПЛОТНОЕ СТЕКЛО --- */
+header,
+section,
+.music-player,
+.project-item,
+.terminal-window,
+.section-body,
+section.tab-content {
+    background: rgba(18, 18, 18, 0.85) !important; /* Было 0.4, стало 0.85 */
+    backdrop-filter: blur(10px) !important; 
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Светлая тема тоже делаем плотнее */
+body.light-mode header,
+body.light-mode section,
+body.light-mode .music-player,
+body.light-mode .project-item,
+body.light-mode .terminal-window,
+body.light-mode .section-body,
+body.light-mode section.tab-content {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+/* --- ФИКС НЕАКТИВНЫХ КНОПОК ВКЛАДОК --- */
+.nav-btn {
+    background: #151515 !important; /* Плотный темный фон */
+    border: 1px solid #444 !important; /* Четкая серая рамка */
+    color: #aaa !important; /* Светло-серый текст, чтобы читался */
+    backdrop-filter: none !important; /* Убираем размытие, если оно было */
+}
+
+/* При наведении делаем ярче */
+.nav-btn:hover:not(.active) {
+    border-color: var(--accent-color, #4ade80) !important;
+    color: #fff !important;
+    background: #222 !important;
+}
+
+/* Активная кнопка остается градиентной, но делаем ей четкую рамку */
+.nav-btn.active {
+    border: 1px solid var(--accent-color, #4ade80) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+}
+/* --- КНОПКА СМЕНЫ ТЕМЫ В САЙДБАРЕ --- */
+#theme-toggle {
+    position: static !important; /* Убираем фиксированное позиционирование */
+    margin-top: 20px; /* Отступ сверху */
+    width: 100%; /* Растягиваем на всю ширину сайдбара */
+    padding: 10px 15px;
+    background: rgba(20, 20, 20, 0.8) !important;
+    border: 1px solid #333 !important;
+    border-radius: 8px !important;
+    color: #d1d1d1 !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+#theme-toggle:hover {
+    border-color: var(--accent-color, #4ade80) !important;
+    color: #fff !important;
+    background: rgba(30, 30, 30, 0.9) !important;
+}
+
+/* При наведении подсвечиваем акцентом */
+#theme-toggle:hover {
+    border-color: var(--accent-color, #4ade80) !important;
+    color: #fff !important;
+    background: rgba(30, 30, 30, 0.9) !important;
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.2) !important;
+}
+
+/* Убираем лишнюю тень у текста, если она была */
+#theme-toggle {
+    text-shadow: none !important;
+}
+/* --- ФИКС КНОПКИ ТЕМЫ В САЙДБАРЕ --- */
+.sidebar-themes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Отступ между цветами и кнопкой */
+}
+
+#theme-toggle {
+    position: static !important;
+    width: 100% !important;
+    margin-top: 10px !important;
+    padding: 10px 15px !important;
+    background: rgba(20, 20, 20, 0.8) !important;
+    border: 1px solid #333 !important;
+    border-radius: 8px !important;
+    color: #d1d1d1 !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    z-index: 10;
+}
+
+#theme-toggle:hover {
+    border-color: var(--accent-color, #4ade80) !important;
+    color: #fff !important;
+    background: rgba(30, 30, 30, 0.9) !important;
+}
+/* --- ФИКС БЕЛЫХ КАРТОЧЕК В ПРОЕКТАХ --- */
+.project-item {
+    background: rgba(20, 20, 20, 0.85) !important; /* Темный плотный фон */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* Возвращаем заголовки проектов (чтобы не сливались) */
+.project-item h3 {
+    color: var(--accent-color, #4ade80) !important; /* Делаем их твоего цвета или белыми */
+    margin-bottom: 10px;
+}
+
+.project-item p {
+    color: #d1d1d1 !important; /* Серый текст для описания */
+}
+body.light-mode .project-item {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+body.light-mode .project-item h3 {
+    color: #000 !important; /* Черный заголовок для светлой темы */
+}
+body.light-mode .project-item p {
+    color: #333 !important;
+}
+/* --- ФИКС СВЕТЛОЙ ТЕМЫ --- */
+
+/* Текст в плеере */
+body.light-mode .player-info h3 {
+    color: #000 !important;
+}
+body.light-mode .player-info p {
+    color: #555 !important;
+}
+
+/* Заголовки в секциях (Время и Статус, Roadmap и т.д.) */
+body.light-mode .section-header h2,
+body.light-mode .clock-box h2,
+body.light-mode .timeline-header h3 {
+    color: #000 !important;
+}
+
+/* Текст в секциях */
+body.light-mode .section-body p,
+body.light-mode .timeline-date,
+body.light-mode .timeline-details p {
+    color: #333 !important;
+}
+
+/* Кнопки навигации в плеере (перемотка, пауза) */
+body.light-mode .ctrl-btn {
+    background: #e0e0e0 !important;
+    color: #000 !important;
+    border-color: #ccc !important;
+}
+
+/* Блок со статусом сервера */
+body.light-mode .status-box {
+    background: #fff !important;
+    border-color: #ccc !important;
+    color: #000 !important;
+}
+
+/* Сам плеер и секции (чтобы были не серыми, а белыми) */
+body.light-mode .music-player,
+body.light-mode section {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+/* --- ФИКС ТАЙМЛАЙНА В СВЕТЛОЙ ТЕМЕ --- */
+body.light-mode .timeline-content {
+    background: #f4f4f9 !important; /* Светлый фон карточки */
+    border: 1px solid #ddd !important; /* Светлая рамка */
+}
+
+body.light-mode .timeline-header h3 {
+    color: #000 !important; /* Черный текст заголовка */
+}
+
+body.light-mode .timeline-content:hover {
+    border-color: var(--accent-color, #4ade80) !important; /* Подсветка при наведении */
+}
+
+body.light-mode .timeline-details p {
+    color: #333 !important; /* Темный текст описания */
+}
+
+/* Кнопка плюса (toggle-icon) */
+body.light-mode .toggle-icon {
+    color: var(--accent-color, #4ade80) !important; 
+}
+/* --- КРАСИВАЯ КНОПКА "НАВЕРХ" --- */
+#scroll-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50% !important;
+    
+    /* Темный фон с размытием */
+    background: rgba(20, 20, 20, 0.8) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    
+    /* Рамка цвета акцента */
+    border: 1px solid var(--accent-color, #4ade80) !important;
+    
+    /* Цвет самой стрелки */
+    color: var(--accent-color, #4ade80) !important;
+    
+    cursor: pointer;
+    z-index: 1000;
+    display: none; /* Скрыта по умолчанию, JS показывает при скролле */
+    justify-content: center !important;
+    align-items: center !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Убираем эмодзи, если оно осталось */
+#scroll-top-btn svg {
+    display: block;
+}
+
+/* При наведении кнопка светится */
+#scroll-top-btn:hover {
+    background: var(--accent-color, #4ade80) !important;
+    color: #000 !important;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 0 15px var(--accent-color, #4ade80) !important;
+}
+/* --- КРАСИВЫЙ ПЛЕЕР --- */
+.music-player {
+    background: rgba(20, 20, 20, 0.6) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+.progress-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+.progress-container {
+    flex-grow: 1;
+    height: 6px;
+    background: #111;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-color, #4ade80), #ffffff);
+    border-radius: 3px;
+    
+    transition: width 0.1s linear;
+}
+
+/* Ползунок громкости */
+#volume-slider {
+    -webkit-appearance: none;
+    width: 80px;
+    height: 4px;
+    background: #111;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-color, #4ade80);
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--accent-color, #4ade80);
+}
+
+
+
+/* Красивые кнопки переключения */
+.ctrl-btn {
+    transition: all 0.2s ease;
+}
+.ctrl-btn:hover {
+    transform: scale(1.1);
+    color: var(--accent-color, #4ade80);
+    border-color: var(--accent-color, #4ade80);
+}
+/* --- ВЫРАВНИВАНИЕ ПЛЕЕРА --- */
+.music-player {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: nowrap; /* Запрещаем перенос элементов */
+    padding: 20px;
+}
+
+.player-cover {
+    flex-shrink: 0; /* Обложка не сжимается */
+}
+
+.player-info {
+    flex: 1; /* Информация занимает доступное место */
+    min-width: 200px;
+}
+
+.player-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap; /* Чтобы кнопки переносились на мобилках */
+}
+
+.visualizer-container {
+    flex: 1; /* Визуализатор занимает оставшееся место */
+    height: 80px;
+    min-width: 150px;
+    display: flex;
+    align-items: flex-end;
+}
+#visualizer {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* --- ФИКС ПОЛЗУНКА ГРОМКОСТИ --- */
+#volume-slider {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    width: 80px !important;
+    height: 4px !important;
+    background: #333 !important;
+    border-radius: 2px !important;
+    outline: none !important;
+    cursor: pointer;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    background: var(--accent-color, #4ade80) !important;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+#volume-slider::-moz-range-thumb {
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    background: var(--accent-color, #4ade80) !important;
+    cursor: pointer;
+    border: none;
+}
+
+/* --- фикс кнпоки рандома --- */
+#repeat-btn {
+    -webkit-appearance: none !important; /* Убираем дефолтный стиль браузера */
+    appearance: none !important;
+    background: #222 !important; /* Темный фон */
+    color: #d1d1d1 !important; /* Серый текст */
+    border: 1px solid #444 !important; /* Рамка */
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important; /* Круглая */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 1.2rem !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#repeat-btn:hover {
+    background: #333 !important;
+    color: var(--accent-color, #4ade80) !important;
+    border-color: var(--accent-color, #4ade80) !important;
+}
+
+#repeat-btn.active {
+    color: var(--accent-color, #4ade80) !important;
+    border-color: var(--accent-color, #4ade80) !important;
+    background: rgba(74, 222, 128, 0.1) !important;
+}
+
+/* --- АБСОЛЮТНЫЙ ФИКС ВСЕХ КНОПОК ПЛЕЕРА --- */
+button.ctrl-btn, #repeat-btn {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background: #222 !important;
+    color: #d1d1d1 !important;
+    border: 1px solid #444 !important;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 1.2rem !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    outline: none !important;
+    transition: all 0.2s ease !important;
+}
+
+button.ctrl-btn:hover, #repeat-btn:hover {
+    background: #333 !important;
+    color: var(--accent-color, #4ade80) !important;
+    border-color: var(--accent-color, #4ade80) !important;
+    transform: scale(1.1) !important;
+}
+
+#repeat-btn.active {
+    color: var(--accent-color, #4ade80) !important;
+    border-color: var(--accent-color, #4ade80) !important;
+    background: rgba(74, 222, 128, 0.1) !important;
+}
+
+/* Фикс кнопки Play (она должна быть больше) */
+#play-pause-btn.play-btn {
+    background: linear-gradient(90deg, var(--accent-color, #4ade80), #ffffff, var(--accent-color, #4ade80)) !important;
+    background-size: 200% 200% !important;
+    color: #000 !important;
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.5rem !important;
+}
+#play-pause-btn.play-btn:hover {
+    background: #3b82f6 !important;
+    color: #fff !important;
+}
+
+/* --- ФИКС ПОЛОСОК МОНИТОРИНГА (ТОЛЬКО ДЛЯ МОНИТОРИНГА) --- */
+.monitor-item .progress-bar {
+    width: 100% !important;
+    height: 12px !important;
+    background-color: #111 !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+    border: 1px solid #333 !important;
+    display: block !important;
+}
+
+.monitor-item .progress-fill {
+    height: 100% !important;
+    background-color: var(--accent-color, #4ade80) !important;
+    border-radius: 6px !important;
+    display: block !important;
+    transition: width 0.5s ease !important;
+}
+/* --- ФИНАЛЬНЫЙ ФИКС ПОЛОСКИ --- */
+#progress-container {
+    width: 100% !important;
+    height: 6px !important;
+    background: #222 !important; 
+    border-radius: 3px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    overflow: visible !important;
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+#progress-bar {
+    height: 100% !important;
+    background: var(--accent-color, #4ade80) !important;
+    border-radius: 3px !important;
+    
+    position: relative !important;
+    transition: width 0.1s linear !important;
+}
+
+.progress-thumb {
+    position: absolute !important;
+    right: -6px; 
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 12px !important;
+    height: 12px !important;
+    background: #fff !important; 
+    border-radius: 50% !important;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5) !important;
+    pointer-events: none;
+}
+/* --- ФИНАЛЬНЫЙ ФИКС ПОЛОСКИ --- */
+#progress-container {
+    width: 100% !important;
+    height: 6px !important;
+    background: #222 !important; 
+    border-radius: 3px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    overflow: visible !important;
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+#progress-bar {
+    height: 100% !important;
+    background: var(--accent-color, #4ade80) !important;
+    border-radius: 3px !important;
+    width: 0%; /* БЕЗ !important, чтобы JS мог менять */
+    position: relative !important;
+    transition: width 0.1s linear !important;
+}
+
+.progress-thumb {
+    position: absolute !important;
+    right: -6px; 
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 12px !important;
+    height: 12px !important;
+    background: #fff !important; 
+    border-radius: 50% !important;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5) !important;
+    pointer-events: none;
+}
+/* --- ВИДЕО НА ФОНЕ ПРЕЛОАДЕРА --- */
+#loader-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0; /* Видео на заднем плане прелоадера */
+    opacity: 0.4; /* Делаем полупрозрачным, чтобы текст читался */
+    pointer-events: none;
+}
+
+/* Убедимся, что контент прелоадера поверх видео */
+.terminal-load-box {
+    position: relative;
+    z-index: 1;
+}
+
+/* Сам прелоадер должен быть поверх всего */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a0a0a; /* Черный фон на случай, если видео не загрузится */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    overflow: hidden; /* Чтобы видео не вылезало за края */
 }
