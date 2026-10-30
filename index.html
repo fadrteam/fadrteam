@@ -10,11 +10,14 @@
 </head>
 <body>
        <!-- Прелоадер -->
-    <div id="preloader">
-        <!-- Фоновое видео прелоадера -->
-        <video autoplay muted loop playsinline id="loader-bg-video">
-            <source src="loader-video.mp4" type="video/mp4">
-        </video>
+<div id="preloader">
+    <!-- Фон на случай, если видео не загрузится -->
+    <div class="preloader-fallback-bg"></div>
+
+    <video autoplay muted loop playsinline webkit-playsinline x5-playsinline id="loader-bg-video">
+        <source src="loader-video.mp4" type="video/mp4">
+    </video>
+
         
         <!-- Контент прелоадера (лого, текст, полоска) -->
         <div class="terminal-load-box">
