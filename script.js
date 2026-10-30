@@ -2,12 +2,12 @@
 // 1. МУЗЫКА (Визуальный Плеер)
 // ==========================================
 const playlist = [
-    { file: "music/track1.mp3", title: "YAW", artist: "GERXMVP", cover: "cover1.jpg" },
+    { file: "music/track1.mp3", title: "CutMyHeart Slowed", artist: "UMBASAP", cover: "cover1.jpg" },
     { file: "music/track2.mp3", title: "Overlook (Slowed)", artist: "Bomby.", cover: "cover2.jpg" },
     { file: "music/track3.mp3", title: "Faith", artist: "Hugeloud", cover: "cover3.jpg" },
     { file: "music/track4.mp3", title: "Liquid", artist: "GreenHuedee", cover: "cover4.jpg" },
     { file: "music/track5.mp3", title: "VEM ME PEGAR", artist: "HONEYWOOD", cover: "cover5.jpg" },
-    { file: "music/track6.mp3", title: "CHOL L", artist: "TRXSHBXY", cover: "cover6.jpg" }
+    { file: "music/track6.mp3", title: "CHOD L", artist: "WARMANE, TRXSHBXY, MATORO", cover: "cover6.jpg" }
 ];
 
 let currentTrack = 0;
@@ -21,11 +21,19 @@ if (player) {
     const trackArtist = document.getElementById('track-artist');
     const progressBar = document.getElementById('progress-bar');
     const progressContainer = document.getElementById('progress-container');
+    const currentTimeEl = document.getElementById('current-time');
+    const totalTimeEl = document.getElementById('total-time');
+    const volumeSlider = document.getElementById('volume-slider');
+    const repeatBtn = document.getElementById('repeat-btn');
+    
+    let isRepeat = false;
+    let isSeeking = false;
 
     function loadTrack(index) {
         const track = playlist[index];
         player.src = track.file;
-        player.volume = 0.1;
+        player.load();
+        player.volume = volumeSlider ? volumeSlider.value : 0.1;
         if(trackTitle) trackTitle.textContent = track.title;
         if(trackArtist) trackArtist.textContent = track.artist;
         if(progressBar) progressBar.style.width = '0%';
@@ -34,17 +42,50 @@ if (player) {
     }
 
     function updateProgress() {
-        if (player.duration && progressBar) {
+        if (isSeeking) return;
+
+        if (player.duration && !isNaN(player.duration) && player.duration !== Infinity && progressBar) {
             const percent = (player.currentTime / player.duration) * 100;
-            progressBar.style.width = `${percent}%`;
+            const safePercent = Math.min(100, Math.max(0, percent));
+            progressBar.style.width = `${safePercent}%`;
+        } else if (progressBar) {
+            progressBar.style.width = '0%';
+        }
+
+        if (currentTimeEl && totalTimeEl && player.duration !== Infinity) {
+            let curMins = Math.floor(player.currentTime / 60);
+            let curSecs = Math.floor(player.currentTime % 60);
+            let durMins = Math.floor(player.duration / 60) || 0;
+            let durSecs = Math.floor(player.duration % 60) || 0;
+            currentTimeEl.textContent = `${curMins}:${curSecs < 10 ? '0' : ''}${curSecs}`;
+            totalTimeEl.textContent = `${durMins}:${durSecs < 10 ? '0' : ''}${durSecs}`;
         }
     }
 
+      // Перемотка по клику
     if (progressContainer) {
         progressContainer.addEventListener('click', (e) => {
+            if (!player.duration || isNaN(player.duration) || player.duration === Infinity) return;
+            
             const rect = progressContainer.getBoundingClientRect();
             const percent = (e.clientX - rect.left) / rect.width;
-            player.currentTime = percent * player.duration;
+            const safePercent = Math.min(1, Math.max(0, percent));
+            const newTime = safePercent * player.duration;
+            
+            isSeeking = true;
+            player.currentTime = newTime;
+            
+            player.addEventListener('seeked', function onSeeked() {
+                // Если браузер скинул время в 0, но мы кликнули не в начало — возвращаем
+                if (player.currentTime === 0 && newTime > 1) {
+                    console.log("Браузер сбросил время. Возвращаем...");
+                    player.currentTime = newTime;
+                }
+                isSeeking = false;
+                player.removeEventListener('seeked', onSeeked);
+            }, { once: true });
+            
+            setTimeout(() => { isSeeking = false; }, 500);
         });
     }
 
@@ -68,7 +109,6 @@ if (player) {
             if(playPauseBtn) playPauseBtn.textContent = '⏸';
         });
     }
-
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
             currentTrack = (currentTrack + 1) % playlist.length;
@@ -78,9 +118,35 @@ if (player) {
         });
     }
 
+    if (repeatBtn) {
+        repeatBtn.addEventListener('click', () => {
+            isRepeat = !isRepeat;
+            repeatBtn.classList.toggle('active', isRepeat);
+        });
+    }
+
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', (e) => {
+            player.volume = e.target.value;
+        });
+    }
+
     player.addEventListener('timeupdate', updateProgress);
+    
+    player.addEventListener('loadedmetadata', () => {
+        updateProgress();
+    });
+
     player.addEventListener('ended', () => {
-        currentTrack = (currentTrack + 1) % playlist.length;
+        if (isRepeat) {
+            let nextTrack = Math.floor(Math.random() * playlist.length);
+            while (nextTrack === currentTrack && playlist.length > 1) {
+                nextTrack = Math.floor(Math.random() * playlist.length);
+            }
+            currentTrack = nextTrack;
+        } else {
+            currentTrack = (currentTrack + 1) % playlist.length;
+        }
         loadTrack(currentTrack);
         player.play();
     });
@@ -121,20 +187,36 @@ if (canvasViz) {
 
     function drawVisualizer() {
         requestAnimationFrame(drawVisualizer);
-        ctxViz.fillStyle = 'rgba(15, 15, 15, 0.2)';
-        ctxViz.fillRect(0, 0, canvasViz.width, canvasViz.height);
+        ctxViz.clearRect(0, 0, canvasViz.width, canvasViz.height);
         if (!analyser) return;
+
         analyser.getByteFrequencyData(dataArray);
-        const barWidth = (canvasViz.width / dataArray.length) * 2.5;
+        
+        const barWidth = 4;
+        const barGap = 3;
+        const totalBars = Math.floor(canvasViz.width / (barWidth + barGap));
+        
         let x = 0;
-        for (let i = 0; i < dataArray.length; i++) {
-            const barHeight = dataArray[i] / 2;
-            const gradient = ctxViz.createLinearGradient(0, 0, 0, canvasViz.height);
-            gradient.addColorStop(0, '#4ade80');
-            gradient.addColorStop(1, '#3b82f6');
-            ctxViz.fillStyle = gradient;
-            ctxViz.fillRect(x, canvasViz.height - barHeight, barWidth, barHeight);
-            x += barWidth + 1;
+        for (let i = 0; i < totalBars; i++) {
+            let sum = 0;
+            let count = 0;
+            for(let j = 0; j < (dataArray.length / totalBars); j++) {
+                sum += dataArray[Math.floor(i * (dataArray.length / totalBars)) + j] || 0;
+                count++;
+            }
+            let average = sum / count;
+            
+            let barHeight = (average / 255) * canvasViz.height;
+            if (barHeight < 4) barHeight = 4; 
+
+            const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim() || '#4ade80';
+            
+            ctxViz.fillStyle = accentColor;
+            ctxViz.beginPath();
+            ctxViz.roundRect(x, canvasViz.height - barHeight, barWidth, barHeight, [2, 2, 0, 0]);
+            ctxViz.fill();
+
+            x += barWidth + barGap;
         }
     }
 
@@ -168,8 +250,8 @@ function updateClock() {
 }
 
 if (clockEl) {
-    updateClock(); // Вызываем сразу, чтобы время появилось моментально
-    setInterval(updateClock, 1000); // И потом обновляем каждую секунду
+    updateClock();
+    setInterval(updateClock, 1000);
 }
 
 // ==========================================
@@ -190,24 +272,18 @@ if (colorBtn) {
 // ==========================================
 document.querySelectorAll('.nav-btn').forEach(button => {
     button.addEventListener('click', (e) => {
-        // Если это ссылка, не трогаем её
         if (button.tagName === 'A') return;
-
         e.preventDefault();
-
         const targetId = button.getAttribute('data-target');
         const targetTab = document.getElementById(targetId);
         if (!targetTab) return;
-        
         const parentMenu = button.closest('.nav-menu');
         if (!parentMenu) return;
-        
         parentMenu.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
         const parentContainer = parentMenu.parentElement;
         if (parentContainer) {
             parentContainer.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
         }
-        
         button.classList.add('active');
         targetTab.classList.add('active');
     });
@@ -405,17 +481,14 @@ if (termInput && termOutput) {
             const cmd = rawCmd.toLowerCase();
             if (cmd === '') return;
 
-            // Выводим введенную команду
             const p = document.createElement('p');
             p.innerHTML = `$ ${rawCmd}`;
             termOutput.appendChild(p);
 
-            // --- ОБРАБОТКА КОМАНД ---
             if (cmd === 'clear') {
                 termOutput.innerHTML = '';
             } 
             else if (cmd === 'user') {
-                // СБОР ДАННЫХ О ПОЛЬЗОВАТЕЛЕ (OSINT)
                 const userInfo = [
                     `ОС: ${navigator.platform}`,
                     `Браузер: ${navigator.userAgent}`,
@@ -424,15 +497,13 @@ if (termInput && termOutput) {
                     `Онлайн: ${navigator.onLine ? 'Да' : 'Нет'}`,
                     `Часовой пояс: ${Intl.DateTimeFormat().resolvedOptions().timeZone}`
                 ].join('\n');
-                
                 const res = document.createElement('p');
                 res.style.color = '#3b82f6';
-                res.style.whiteSpace = 'pre-wrap'; // Чтобы переносить строки
+                res.style.whiteSpace = 'pre-wrap';
                 res.textContent = userInfo;
                 termOutput.appendChild(res);
             }
             else if (cmd === 'ascii') {
-                // ASCII АРТ
                 const asciiArt = `
   ███████╗ █████╗ ██████╗ ██████╗ 
   ██╔════╝██╔══██╗██╔══██╗██╔══██╗
@@ -461,13 +532,11 @@ if (termInput && termOutput) {
                 termOutput.appendChild(err);
             }
 
-            // Очищаем поле и скроллим вниз
             termInput.value = '';
             termOutput.scrollTop = termOutput.scrollHeight;
         }
     });
 }
-
 
 // ==========================================
 // 15. СВЕЧЕНИЕ ЗА МЫШКОЙ
@@ -553,15 +622,12 @@ if (weatherBtn) {
         resultBox.innerHTML = "Загрузка...";
 
         try {
-            // Используем формат j1 (JSON) для получения данных
             const url = `https://wttr.in/${encodeURIComponent(city)}?format=j1`;
             const response = await fetch(url);
-            
             if (!response.ok) throw new Error("Город не найден");
             
             const data = await response.json();
             const current = data.current_condition[0];
-            
             const temp = current.temp_C;
             const desc = current.lang_ru ? current.lang_ru[0].value : current.weatherDesc[0].value;
 
@@ -627,6 +693,7 @@ function changeAccent(color) {
     const logoSpan = document.querySelector('.sidebar-logo span');
     if (logoSpan) logoSpan.style.color = color;
 }
+
 // ==========================================
 // 24. ЗАЩИТА ССЫЛОК ОТ ПЕРЕХВАТА
 // ==========================================
@@ -638,7 +705,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Применяем сохраненный цвет при загрузке
     const savedColor = localStorage.getItem('accentColor');
     if (savedColor) {
         changeAccent(savedColor);
@@ -646,6 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
         changeAccent('#4ade80');
     }
 });
+
 // ==========================================
 // 25. ПРОВЕРКА УТЕЧЕК EMAIL (XposedOrNot через прокси)
 // ==========================================
@@ -662,7 +729,6 @@ if (emailBtn) {
         resultBox.innerHTML = "Проверка...";
 
         try {
-            // Используем публичный CORS-прокси для обхода блокировки браузера
             const proxyUrl = 'https://api.allorigins.win/raw?url=';
             const targetUrl = `https://api.xposedornot.com/v1/check-email/${encodeURIComponent(email)}`;
             
@@ -694,3 +760,50 @@ if (emailBtn) {
         }
     });
 }
+
+// ==========================================
+// 26. ПРЕЛОАДЕР (ТЕРМИНАЛ)
+// ==========================================
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    const logBox = document.getElementById('loader-log');
+    const fillBar = document.querySelector('.terminal-load-fill');
+    
+    if (preloader && logBox && fillBar) {
+        const logs = [
+            "[SYSTEM] Booting...",
+            "[OK] Loading modules...",
+            "[OK] Connecting to server...",
+            "[OK] Decrypting data...",
+            "[SYSTEM] Access Granted."
+        ];
+        
+        let currentLine = 0;
+        let currentChar = 0;
+        
+        function typeLog() {
+            if (currentLine < logs.length) {
+                if (currentChar < logs[currentLine].length) {
+                    logBox.innerHTML += logs[currentLine][currentChar];
+                    currentChar++;
+                    setTimeout(typeLog, 20);
+                } else {
+                    logBox.innerHTML += "<br>";
+                    currentLine++;
+                    currentChar = 0;
+                    
+                    let progress = (currentLine / logs.length) * 100;
+                    fillBar.style.width = progress + '%';
+                    
+                    setTimeout(typeLog, 150);
+                }
+            } else {
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                }, 500);
+            }
+        }
+        
+        setTimeout(typeLog, 200);
+    }
+});
