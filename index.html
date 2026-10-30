@@ -5,11 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fadr | OSINT & Tech</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Подключение иконок FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+       <!-- Прелоадер -->
+    <div id="preloader">
+        <!-- Фоновое видео прелоадера -->
+        <video autoplay muted loop playsinline id="loader-bg-video">
+            <source src="loader-video.mp4" type="video/mp4">
+        </video>
+        
+        <!-- Контент прелоадера (лого, текст, полоска) -->
+        <div class="terminal-load-box">
+            <img src="avatar.jpg" alt="FADR Logo" class="loader-logo">
+            <div class="terminal-load-text" id="loader-log"></div>
+            <div class="terminal-load-bar"><div class="terminal-load-fill"></div></div>
+        </div>
+    </div>
+
     <!-- Боковая панель -->
     <div class="sidebar">
         <div class="sidebar-logo">FADR<span>.TEAM</span></div>
@@ -28,14 +42,10 @@
                 <button onclick="changeAccent('#ff5f56')" style="background: #ff5f56;"></button>
             </div>
         </div>
-    </div>
+    </div> 
 
-    <!-- Основной контент -->
     <div class="main-content">
-        
-        <button id="theme-toggle">🌓 Сменить тему</button>
-
-        <!-- ================= ГЛАВНАЯ ================= -->
+        <!-- ГЛАВНАЯ -->
         <div id="tab-home" class="tab-page active">
             <header id="top">
                 <img src="avatar.jpg" alt="Моя аватарка" class="avatar">
@@ -43,8 +53,7 @@
                 <p>Изучаю OSINT, железо и веб.</p>
             </header>
 
-            <audio id="bg-music"></audio>
-            
+            <audio id="bg-music" preload="metadata"></audio>         
             <div class="music-player">
                 <div class="player-cover">
                     <img src="https://via.placeholder.com/150/1a1a1a/4ade80?text=FADR" alt="Обложка" id="player-cover-img">
@@ -52,17 +61,26 @@
                 <div class="player-info">
                     <h3 id="track-title">Название трека</h3>
                     <p id="track-artist">Исполнитель</p>
-                    <div class="progress-container" id="progress-container">
-                        <div class="progress-bar" id="progress-bar"></div>
+                    
+                    <div class="progress-wrapper">
+                        <span id="current-time">0:00</span>
+                        <div class="progress-container" id="progress-container">
+                            <div class="progress-bar" id="progress-bar">
+                                <div class="progress-thumb"></div>
+                            </div>
+                        </div>
+                        <span id="total-time">0:00</span>
                     </div>
                     <div class="player-controls">
+                        <button id="repeat-btn" class="ctrl-btn" title="Повтор">🔁</button>
                         <button id="prev-btn" class="ctrl-btn">⏮</button>
                         <button id="play-pause-btn" class="ctrl-btn play-btn">▶</button>
                         <button id="next-btn" class="ctrl-btn">⏭</button>
+                        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.1" title="Громкость">
                     </div>      
                 </div>
                 <div class="visualizer-container">
-                    <canvas id="visualizer" width="600" height="100"></canvas>
+                    <canvas id="visualizer"></canvas>
                 </div>
             </div>
 
@@ -94,62 +112,56 @@
                 </div>
             </section>
 
-           <section class="active">
-    <div class="section-header" onclick="toggleSection(this)">
-        <h2>📅 Мой Roadmap</h2>
-        <span class="toggle-arrow">▼</span>
-    </div>
-    <div class="section-body">
-        <div class="timeline">
-            <!-- 1-й пункт -->
-            <div class="timeline-item">
-                <div class="timeline-dot" style="background: #4ade80;"></div>
+            <section class="active">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <h2>📅 Мой Roadmap</h2>
+                    <span class="toggle-arrow">▼</span>
+                </div>
+                <div class="section-body">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: #4ade80;"></div>
+                            <div class="timeline-date">Октябрь 2026</div>
+                            <div class="timeline-content">
+                                <div class="timeline-header" onclick="toggleTimeline(this)">
+                                    <h3>Сборка OSINT-комбайна</h3>
+                                    <span class="toggle-icon">+</span>
+                                </div>
+                                <div class="timeline-details">
+                                    <p>Разработка локального инструмента для автоматизации поиска по никам и базам.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: #3b82f6;"></div>
+                            <div class="timeline-date">Ноябрь 2026</div>
+                            <div class="timeline-content">
+                                <div class="timeline-header" onclick="toggleTimeline(this)">
+                                    <h3>Запуск домашнего сервера</h3>
+                                    <span class="toggle-icon">+</span>
+                                </div>
+                                <div class="timeline-details">
+                                    <p>Настройка Xeon для размещения виртуалок с Kali Linux.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: #a855f7;"></div>
+                            <div class="timeline-date">Декабрь 2026</div>
+                            <div class="timeline-content">
+                                <div class="timeline-header" onclick="toggleTimeline(this)">
+                                    <h3>Дальнейшая разработка веб-сайта</h3>
+                                    <span class="toggle-icon">+</span>
+                                </div>
+                                <div class="timeline-details">
+                                    <p>Обновления и многое другое.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                <div class="timeline-date">Октябрь 2026</div>
-                <div class="timeline-content">
-                    <div class="timeline-header" onclick="toggleTimeline(this)">
-                        <h3>Сборка OSINT-комбайна</h3>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="timeline-details">
-                        <p>Разработка локального инструмента для автоматизации поиска по никам и базам.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 2-й пункт -->
-              <div class="timeline-item">
-                <div class="timeline-dot" style="background: #3b82f6;"></div>
-                <div class="timeline-date">Ноябрь 2026</div>
-                <div class="timeline-content">
-                    <div class="timeline-header" onclick="toggleTimeline(this)">
-                        <h3>Запуск домашнего сервера</h3>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="timeline-details">
-                        <p>Настройка Xeon для размещения виртуалок с Kali Linux.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- 3-й пункт -->
-              <div class="timeline-item">
-                <div class="timeline-dot" style="background: #a855f7;"></div>
-                <div class="timeline-date">Декабрь 2026</div>
-                <div class="timeline-content">
-                    <div class="timeline-header" onclick="toggleTimeline(this)">
-                        <h3>Дальнейшая разработка веб-сайта</h3>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="timeline-details">
-                        <p>Обновления и многое другое.</p>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- Закрытие .timeline -->
-    </div> <!-- Закрытие .section-body -->
-</section>
-
-            <!-- БЛОК ОБО МНЕ НА ГЛАВНОЙ (вкладки) -->
             <div class="nav-menu">
                 <button class="nav-btn active" data-target="home-tab-about">Обо мне</button>
                 <button class="nav-btn" data-target="home-tab-projects">Проекты</button>
@@ -161,7 +173,7 @@
                 <p>Привет! Я Fadr. Увлекаюсь OSINT, железом и веб-разработкой.</p>
             </section>
 
-                        <section id="home-tab-projects" class="tab-content">
+            <section id="home-tab-projects" class="tab-content">
                 <h2>Мои проекты</h2>
                 <div class="project-item">
                     <h3>OSINT-кейс №1 (Закрыт)</h3>
@@ -183,23 +195,17 @@
                 </div>
             </section>
 
-                        <section id="home-tab-contact" class="tab-content">
+            <section id="home-tab-contact" class="tab-content">
                 <h2>Контакты</h2>
                 <div class="contact-links">
-                    <a href="https://t.me/fadrteam" target="_blank">
-                        <i class="fa-brands fa-telegram"></i> Telegram
-                    </a>
-                    <a href="https://github.com/fadrteam" target="_blank">
-                        <i class="fa-brands fa-github"></i> GitHub
-                    </a>
-                    <a href="mailto:твоя_почта@mail.ru">
-                        <i class="fa-solid fa-envelope"></i> Email
-                    </a>
+                    <a href="https://t.me/fadrteam" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram</a>
+                    <a href="https://github.com/fadrteam" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+                    <a href="mailto:твоя_почта@mail.ru"><i class="fa-solid fa-envelope"></i> Email</a>
                 </div>
             </section>
         </div>
 
-                <!-- ================= OSINT ================= -->
+        <!-- OSINT -->
         <div id="tab-osint" class="tab-page">
             <section>
                 <div class="section-header" onclick="toggleSection(this)">
@@ -214,8 +220,6 @@
                     </div>
                 </div>
             </section>
-
-            <!-- Проверка утечек Email -->
             <section>
                 <div class="section-header" onclick="toggleSection(this)">
                     <h2>📧 Проверка утечек Email</h2>
@@ -230,12 +234,9 @@
                     <div id="email-result" style="margin-top: 15px; font-family: monospace;"></div>
                 </div>
             </section>
+        </div>
 
-        </div> <!-- ЗАКРЫТИЕ tab-osint -->
-
-            
-
-        <!-- ================= ИНСТРУМЕНТЫ ================= -->
+        <!-- ИНСТРУМЕНТЫ -->
         <div id="tab-tools" class="tab-page">
             <section>
                 <div class="section-header" onclick="toggleSection(this)">
@@ -250,16 +251,15 @@
                         </div>
                         <div class="monitor-item">
                             <div class="monitor-label"><span>Загрузка ОЗУ</span> <span id="ram-value">0%</span></div>
-                            <div class="progress-bar"><div class="progress-fill" id="ram-bar" style="width: 0%; background-color: #3b82f6;"></div></div>
+                            <div class="progress-bar"><div class="progress-fill" id="ram-bar" style="width: 0%;"></div></div>
                         </div>
                         <div class="monitor-item">
                             <div class="monitor-label"><span>Температура GPU</span> <span id="gpu-value">0°C</span></div>
-                            <div class="progress-bar"><div class="progress-fill" id="gpu-bar" style="width: 0%; background-color: #a855f7;"></div></div>
+                            <div class="progress-bar"><div class="progress-fill" id="gpu-bar" style="width: 0%;"></div></div>
                         </div>
                     </div>
                 </div>
             </section>
-
             <section>
                 <div class="section-header" onclick="toggleSection(this)">
                     <h2>🌤️ Погода</h2>
@@ -273,7 +273,6 @@
                     <div id="weather-result"></div>
                 </div>
             </section>
-
             <section>
                 <div class="section-header" onclick="toggleSection(this)">
                     <h2>🔐 Анализатор пароля</h2>
@@ -284,7 +283,6 @@
                     <div id="password-result"></div>
                 </div>
             </section>
-
             <section>
                 <div class="section-header" onclick="toggleSection(this)">
                     <h2>🌐 IP / Domain Инструмент</h2>
@@ -297,7 +295,6 @@
                     </div>
                 </div>
             </section>
-
             <section>
                 <div class="section-header" onclick="toggleSection(this)">
                     <h2>📝 Блокнот</h2>
@@ -307,7 +304,6 @@
                     <textarea id="notepad" placeholder="Пиши здесь..." style="width:100%; height:100px; background:#111; color:#fff; border:1px solid #333; padding:10px;"></textarea>
                 </div>
             </section>
-            
             <section>
                 <div class="section-header" onclick="toggleSection(this)">
                     <h2>💻 Мини-терминал</h2>
@@ -331,20 +327,18 @@
             </section>
         </div>
 
-        <!-- ================= ОБО МНЕ (для боковой панели) ================= -->
+        <!-- ОБО МНЕ -->
         <div id="tab-about-page" class="tab-page">
             <div class="nav-menu">
                 <button class="nav-btn active" data-target="side-tab-about">Обо мне</button>
                 <button class="nav-btn" data-target="side-tab-projects">Проекты</button>
                 <button class="nav-btn" data-target="side-tab-contact">Контакты</button>
             </div>
-
             <section id="side-tab-about" class="tab-content active">
                 <h2>Обо мне</h2>
                 <p>Привет! Я Fadr. Увлекаюсь OSINT, железом и веб-разработкой.</p>
             </section>
-
-                        <section id="side-tab-projects" class="tab-content">
+            <section id="side-tab-projects" class="tab-content">
                 <h2>Мои проекты</h2>
                 <div class="project-item">
                     <h3>OSINT-кейс №1 (Закрыт)</h3>
@@ -365,19 +359,12 @@
                     <p>Написал этот сайт с нуля на HTML/CSS/JS.</p>
                 </div>
             </section>
-
             <section id="side-tab-contact" class="tab-content">
                 <h2>Контакты</h2>
                 <div class="contact-links">
-                    <a href="https://t.me/fadrteam" target="_blank">
-                        <i class="fa-brands fa-telegram"></i> Telegram
-                    </a>
-                    <a href="https://github.com/fadrteam" target="_blank">
-                        <i class="fa-brands fa-github"></i> GitHub
-                    </a>
-                    <a href="mailto:твоя_почта@mail.ru">
-                        <i class="fa-solid fa-envelope"></i> Email
-                    </a>
+                    <a href="https://t.me/fadrteam" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram</a>
+                    <a href="https://github.com/fadrteam" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+                    <a href="mailto:твоя_почта@mail.ru"><i class="fa-solid fa-envelope"></i> Email</a>
                 </div>
             </section>
         </div>
@@ -387,9 +374,17 @@
             <p>С любовью FADRTEAM.</p>
         </footer>
 
-        <button id="scroll-top-btn" title="Наверх">⬆️</button>
+        <button id="scroll-top-btn" title="Наверх">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 19V5M5 12l7-7 7 7"/>
+            </svg>
+        </button>
     </div>
 
     <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+    </script>
 </body>
 </html>
