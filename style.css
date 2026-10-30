@@ -1270,9 +1270,13 @@ button.ctrl-btn:hover, #repeat-btn:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 0; /* Видео на заднем плане прелоадера */
-    opacity: 0.4; /* Делаем полупрозрачным, чтобы текст читался */
+    z-index: 0;
+    opacity: 0.4;
     pointer-events: none;
+    /* Принудительно растягиваем на мобилках */
+    min-width: 100%;
+    min-height: 100%;
+    transform: translateZ(0);
 }
 
 /* Убедимся, что контент прелоадера поверх видео */
